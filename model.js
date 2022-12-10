@@ -14,16 +14,15 @@ const botAi = async (req,res) => {
     if (message == '/start'){
           const lk = await checkContact(from);
           if(lk == false) {
-            saveContact(from)
-            sip = {text : 'Bot telah aktif ,silahkan dimanfaatkan :)'}
-          }
+              saveContact(from)
+        } 
+        sip = { text: 'Bot telah aktif ,silahkan dimanfaatkan :)' }
     } else if (message == '/stop' ) {
         const lk = await checkContact(from);
         if (lk == true) {
-           
             removeContact(from)
-            sip = {text : 'Bot telah dihentikan,,terimakasih :)'}
         }
+        sip = { text: 'Bot telah dihentikan,,terimakasih :)' }
     } else {
 
         const check = await checkContact(from);
@@ -55,7 +54,7 @@ const botAi = async (req,res) => {
                     model: "text-davinci-003",
                     prompt: message,
                     temperature: 0.3, 
-                    max_tokens: 100,
+                    max_tokens: 300,
                     top_p: 1.0,
                     frequency_penalty: 0.0,
                     presence_penalty: 0.0,
