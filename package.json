@@ -1,7 +1,7 @@
 {
   "name": "wa-bot-ai",
   "version": "1.0.0",
-  "description": "This for webhook AI",
+  "description": "This for webhook or bot chat and CURL to Open Source AI",
   "main": "server.js",
   "scripts": {
     "test": "node server",
