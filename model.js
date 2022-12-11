@@ -52,7 +52,7 @@ const botAi = async (req,res) => {
             } else {
                 const response = await openai.createCompletion({
                     model: "text-davinci-003",
-                    prompt: "Q : " + message,
+                    prompt: "Q : ".message,
                     temperature: 0, 
                     max_tokens: 300,
                     top_p: 1,
