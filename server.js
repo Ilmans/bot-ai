@@ -6,7 +6,12 @@ const model = require('./model')
 
 app.use(bodyParser.urlencoded({limit : '50mb'}))
 app.use(bodyParser.json({limit : '50mb'}))
-app.post('/botai',model.botAi)
+
+app.get('/', (req, res) => {
+    res.send('This is webhook url , integrated with BOT AI - m pedia')
+})
+app.post('/bot', model.botAi)
+
 
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
