@@ -10,7 +10,6 @@ Instalasi :
 - Download script
 - Upload ke server
 - Buat file .env dan isikan di dalamnya dua variabel OPENAI_API_KEY dan BASE_URL
-- install library ,, command : npm install
 - Jalankan node js.
 - done.
 
