@@ -26,40 +26,47 @@ const botAi = async (req,res) => {
         }
         response = { text: 'Bot telah dihentikan,,terimakasih :)' }
     } else {
-        if (!isContactExist) return;
-        if (message == '/stiker') {
-            if (!bufferImage) return;
-                    const buffer = Buffer.from(bufferImage,'base64');
-                    fs.writeFileSync('./public/images/testing.png',buffer)
-                    if(fs.existsSync('./public/images/testing.webp')){
-                       fs.unlinkSync('./public/images/testing.webp')
-                    }
-            const sticker = new Sticker(`${process.env.BASE_URL}/images/testing.png`, {
-                        pack: 'MPedia Pack', // The pack name
-                        author: 'M Pedia', // The author name
-                        type: StickerTypes.CROPPED,
-                        categories: ['🤩', '🎉'], // The sticker category
-                        id: '12345', // The sticker id
-                        quality: 50, // The quality of the output file
-                        background: '#000000' // The sticker background color (only for full stickers)
-                    })
-                    const k = await sticker.toFile('./public/images/testing.webp');
-            
-            response = { sticker: { url: `${process.env.BASE_URL}/images/testing.webp` } }
-                
-            } else {
-            const getResponse = await openai.createCompletion({
-                    model: "text-davinci-003",
-                    prompt: message,
-                    temperature: 0, 
-                    max_tokens: 300,
-                    top_p: 1,
-                    frequency_penalty: 0.0,
-                    presence_penalty: 0.0,
-                  
-                });
         
-            response = { text: getResponse.data.choices[0].text }
+        if (!isContactExist) return;
+        if (message == "/stiker") {
+          if (!bufferImage) return;
+          const buffer = Buffer.from(bufferImage, "base64");
+          fs.writeFileSync("./public/images/testing.png", buffer);
+          if (fs.existsSync("./public/images/testing.webp")) {
+            fs.unlinkSync("./public/images/testing.webp");
+          }
+          const sticker = new Sticker(
+            `${process.env.BASE_URL}/images/testing.png`,
+            {
+              pack: "MPedia Pack", // The pack name
+              author: "M Pedia", // The author name
+              type: StickerTypes.CROPPED,
+              categories: ["🤩", "🎉"], // The sticker category
+              id: "12345", // The sticker id
+              quality: 50, // The quality of the output file
+              background: "#000000", // The sticker background color (only for full stickers)
+            }
+          );
+          const k = await sticker.toFile("./public/images/testing.webp");
+
+          response = {
+            sticker: { url: `${process.env.BASE_URL}/images/testing.webp` },
+          };
+        } else {
+          if (bufferImage) {
+            response = {
+              text: "ngapain kirim gambar? mau bikin stiker? pakai /stiker dong!!",
+            };
+          } else {
+            const getResponse = await openai.createCompletion({
+              model: "text-davinci-003",
+              prompt: message,
+              max_tokens: 300,
+              temperature: 0,
+            });
+            console.log(getResponse.data.choices);
+            response = { text: getResponse.data.choices[0].text };
+          }
         }
 
     }
