@@ -9,9 +9,14 @@ Feature :
 Instalasi :
 - Download script
 - Upload ke server
-- Buat file .env dan isikan di dalamnya dua variabel OPENAI_API_KEY dan BASE_URL
+- Buat file ubah .env.example menjadi .env dan isikan url open ai anda
 - Jalankan node js.
 - done.
 
+command :
+/start untuk mengaktifkan ai dan /stop untuk nonaktifkan ai
+/stiker (sambil mengirim gambar) untuk convert gambar ke stiker
+
 
 lalu masukan urlnya ke webhook whatsapp gateway M Pedia
+http://url/bot
