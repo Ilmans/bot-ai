@@ -1,5 +1,6 @@
 #Whatsapp Bot Integrate with Open AI
 # Script webhook ini hanya berfungsi dengan whatsapp gateway M Pedia ( m-pedia.co.id )
+[![preview](https://youtu.be/lMoCF_fvewA)](https://youtu.be/lMoCF_fvewA)
 
 Feature :
 - Membuat stiker dengan keyword /stiker
