@@ -1,7 +1,12 @@
 const fs = require("fs");
 const { Sticker, StickerTypes } = require("wa-sticker-formatter");
 const { Configuration, OpenAIApi } = require("openai");
-const { removeContact, checkContact, saveContact } = require("./helpers");
+const {
+  removeContact,
+  checkContact,
+  saveContact,
+  manageMessagesCache,
+} = require("./helpers");
 require("dotenv").config();
 
 const configuration = new Configuration({
@@ -58,15 +63,18 @@ const botAi = async (req, res) => {
         };
       } else {
         try {
-          const getResponse = await openai.createCompletion({
-            model: "gpt-3.5-turbo-instruct",
-            prompt: message,
+          const messages = manageMessagesCache(from, "user", message);
+          const getResponse = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo-0125",
+            messages: messages,
             max_tokens: 300,
             temperature: 0,
           });
           console.log(getResponse.data.choices);
-          response = { text: getResponse.data.choices[0].text };
+          response = { text: getResponse.data.choices[0].message.content };
+          manageMessagesCache(from, "system", response.text);
         } catch (error) {
+          console.log(error);
           console.log(error.response?.data?.error?.message);
         }
       }
