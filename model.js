@@ -6,7 +6,7 @@ const {
   checkContact,
   saveContact,
   manageMessagesCache,
-} = require("./helpers");
+} = require("./src/lib/helpers");
 require("dotenv").config();
 
 const configuration = new Configuration({
