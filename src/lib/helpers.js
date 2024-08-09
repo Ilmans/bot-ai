@@ -9,7 +9,6 @@ const loadContact = async () => {
   return contacts;
 };
 
-
 const saveContact = async (from) => {
   const contact = { from };
   const contacts = await loadContact();
@@ -33,14 +32,18 @@ const removeContact = async (from) => {
   fs.writeFileSync(pathcontact, JSON.stringify(contactsNew));
 };
 
-const manageMessagesCache = (number, role, content) => {
+const manageMessagesCache = (number, role, content, isGemini = true) => {
+  const newContent = isGemini
+    ? { parts: [{ text: content }] }
+    : { content: content };
+
   let msgs = cache.get("messages" + number) ?? [];
 
   const messages = [
     ...msgs,
     {
       role,
-      content,
+      ...newContent,
     },
   ];
 
